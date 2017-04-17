@@ -6,25 +6,27 @@ import java.util.Map;
 import com.Common.DemoCommon;
 import com.Common.UserCommon;
 import com.qiang.httpClient.HttpPostClient;
-import com.qiang.utils.FormJSON;
 
-public class ScheduleList65Response extends DemoCommon{
+public class HousePriceTipsSearchRequest extends DemoCommon{
 	/**
-	 * 看房日程一级页面（From6.5）
+	 * 查房价tips搜索(From5.7)
+	 * @param cityId   城市id
 	 * @param uticket
+	 * @param keyword   // 关键词
 	 * @return
 	 */
-	public String getScheduleList65Response(String uticket){
+	public String getHousePriceTipsResponse(String cityId,String keyword){
 		setDemoCommon();
 		HttpPostClient httpPostClient = new HttpPostClient();
-		httpPostClient.setHeader("uticket", uticket);
 		 Map<String, Object> pars = new HashMap<String, Object>();
+			pars.put("cityId", cityId);
+			pars.put("keyword", keyword);
 		httpPostClient.setHeader("App-Secret", httpPostClient.paraMd5(pars,new UserCommon().getOs()));
-		return HttpPostClient.sendHttpPostJson("http://"+DemoCommon.url+"/ihouse/schedule/getSchedules65.rest", pars);
+		return HttpPostClient.sendHttpPostJson("http://"+DemoCommon.url+"/ihouse/housePrice/housePriceTipsSearch.rest", pars);
 	}
 	public static void main(String[] args) {
+		System.out.println(new HousePriceTipsSearchRequest().getHousePriceTipsResponse("2", "永和"));
 
-		System.out.println(FormJSON.format(new ScheduleList65Response().getScheduleList65Response("ME9OSGFQMWNZTjAlQCVkY2I5MjU3YTY0MzhkYjI2ODExZThkYWI0NTk0NmU1OQ==")));
 	}
 
 }
