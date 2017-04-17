@@ -1,0 +1,11 @@
+<suite name = "userSuite">
+    <test name = "test1">
+        <classes>
+        <class name = "com.Demo.test.FeedbackRequestTest"></class>
+        <class name = "com.Demo.test.FeedHouseUnreadCountRequestTest"></class>
+        <class name = "com.Demo.test.HouseNoticeReadRequestTest"></class>
+        <class name = "com.Demo.test.ImAgentListRequestTest"></class>
+    	</classes>
+    </test>
+    
+</suite>
