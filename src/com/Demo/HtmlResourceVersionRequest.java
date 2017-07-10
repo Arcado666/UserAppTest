@@ -7,20 +7,20 @@ import com.Common.DemoCommon;
 import com.Common.UserCommon;
 import com.qiang.httpClient.HttpPostClient;
 
-public class NearbyEstatesRequest extends DemoCommon{
+public class HtmlResourceVersionRequest extends DemoCommon{
 	/**
-	 * 根据用户坐标获取附近在售信息
-	 * @param latitude   //坐标 纬度
-	 * @param longitude  //坐标 经度
+	 * html资源文件版本控制
+	 * @param netType
+	 * @param version
 	 * @return
 	 */
-	public String getNearbyEstatesResponse(String latitude,String longitude){
+	public String getHtmlResourceVersionResponse(String netType,String version){
 		setDemoCommon();
 		HttpPostClient httpPostClient = new HttpPostClient();
 		 Map<String, Object> pars = new HashMap<String, Object>();
-			pars.put("latitude", latitude);
-			pars.put("longitude", longitude);
+			pars.put("netType", netType);
+			pars.put("version", version);
 		httpPostClient.setHeader("App-Secret", httpPostClient.paraMd5(pars,new UserCommon().getOs()));
-		return HttpPostClient.sendHttpPostJson("http://"+DemoCommon.url+"/ihouse/homePage/getNearbyEstates.rest", pars);
+		return HttpPostClient.sendHttpPostJson("http://"+DemoCommon.url+"/ihouse/About/htmlResourceVersion.rest", pars);
 	}
 }

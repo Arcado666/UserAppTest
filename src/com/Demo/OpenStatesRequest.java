@@ -7,20 +7,18 @@ import com.Common.DemoCommon;
 import com.Common.UserCommon;
 import com.qiang.httpClient.HttpPostClient;
 
-public class NearbyEstatesRequest extends DemoCommon{
+public class OpenStatesRequest extends DemoCommon{
 	/**
-	 * 根据用户坐标获取附近在售信息
-	 * @param latitude   //坐标 纬度
-	 * @param longitude  //坐标 经度
+	 * 模块开关接口（爱理财）from 4.2
+	 * @param uticket
 	 * @return
 	 */
-	public String getNearbyEstatesResponse(String latitude,String longitude){
+	public String getOpenStatesResponse(String uticket){
 		setDemoCommon();
 		HttpPostClient httpPostClient = new HttpPostClient();
+		httpPostClient.setHeader("uticket", uticket);
 		 Map<String, Object> pars = new HashMap<String, Object>();
-			pars.put("latitude", latitude);
-			pars.put("longitude", longitude);
 		httpPostClient.setHeader("App-Secret", httpPostClient.paraMd5(pars,new UserCommon().getOs()));
-		return HttpPostClient.sendHttpPostJson("http://"+DemoCommon.url+"/ihouse/homePage/getNearbyEstates.rest", pars);
+		return HttpPostClient.sendHttpPostJson("http://"+DemoCommon.url+"/ihouse/About/openStates.rest", pars);
 	}
 }

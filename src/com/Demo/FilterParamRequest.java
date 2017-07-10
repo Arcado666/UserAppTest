@@ -7,20 +7,18 @@ import com.Common.DemoCommon;
 import com.Common.UserCommon;
 import com.qiang.httpClient.HttpPostClient;
 
-public class NearbyEstatesRequest extends DemoCommon{
+public class FilterParamRequest extends DemoCommon{
 	/**
-	 * 根据用户坐标获取附近在售信息
-	 * @param latitude   //坐标 纬度
-	 * @param longitude  //坐标 经度
+	 * 根据城市获取筛选属性
+	 * @param city   城市名 如：北京、上海，也可以传cityID 比如上海city=2
 	 * @return
 	 */
-	public String getNearbyEstatesResponse(String latitude,String longitude){
+	public String getFilterParamResponse(String city){
 		setDemoCommon();
 		HttpPostClient httpPostClient = new HttpPostClient();
 		 Map<String, Object> pars = new HashMap<String, Object>();
-			pars.put("latitude", latitude);
-			pars.put("longitude", longitude);
+			pars.put("city", city);
 		httpPostClient.setHeader("App-Secret", httpPostClient.paraMd5(pars,new UserCommon().getOs()));
-		return HttpPostClient.sendHttpPostJson("http://"+DemoCommon.url+"/ihouse/homePage/getNearbyEstates.rest", pars);
+		return HttpPostClient.sendHttpPostJson("http://"+DemoCommon.url+"/ihouse/Search/filterParam.rest", pars);
 	}
 }
